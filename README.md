@@ -22,6 +22,8 @@ in der App als eigene Spektrumquelle auswählen.
 
 [Longmynd Mobil 0.1.0-beta.39](android) verbindet sich mit dem Mobil-Relay.
 Im Verbindungsfeld die Adresse des eigenen Raspberry Pi mit Port 8090 eintragen.
+Der [Android-Build](../../actions/workflows/android-beta39.yml) erzeugt APK,
+Quell-ZIP und SHA256-Prüfsummen.
 
 ## Herkunft und Lizenz
 
