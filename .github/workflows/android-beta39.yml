@@ -1,0 +1,55 @@
+name: Build Longmynd Mobil beta.39
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/android-beta39.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency: longmynd-mobil-beta39-build
+
+jobs:
+  release:
+    if: github.repository == 'DL2GHM/longmynd-dual' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Build and verify the Android package
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+          export JAVA_HOME="$JAVA_HOME_17_X64"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          curl --fail --silent --show-error --location \
+            https://repo.maven.apache.org/maven2/org/videolan/android/libvlc-all/3.6.5/libvlc-all-3.6.5.aar \
+            --output "$RUNNER_TEMP/libvlc.aar"
+          mkdir -p dist
+          apk="$PWD/dist/Longmynd-Mobil-0.1.0-beta.39.apk"
+          python3 android/build_apk.py --sdk "$ANDROID_HOME" --jdk "$JAVA_HOME" \
+            --vlc-aar "$RUNNER_TEMP/libvlc.aar" --keystore "$RUNNER_TEMP/longmynd.keystore" \
+            --output "$apk"
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --print-certs "$apk"
+          python3 - "$apk" <<'PY'
+          import re
+          import sys
+          from zipfile import ZipFile
+          with ZipFile(sys.argv[1]) as apk:
+              assert apk.testzip() is None
+              for name in ('classes.dex', 'assets/README-Longmynd.txt'):
+                  assert not re.search(rb'192\.168\.178\.\d+', apk.read(name)), name
+          PY
+          git archive --format=zip --prefix=longmynd-mobil/ \
+            -o dist/Longmynd-Mobil-0.1.0-beta.39-Quellen.zip HEAD:android
+          (cd dist && sha256sum *.apk *.zip > SHA256SUMS.txt)
+      - name: Upload verified build files
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: Longmynd-Mobil-beta.39
+          path: dist/
+          if-no-files-found: error
