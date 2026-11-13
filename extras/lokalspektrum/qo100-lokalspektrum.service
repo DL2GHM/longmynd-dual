@@ -1,0 +1,17 @@
+[Unit]
+Description=QO-100 Lokalspektrum vom RTL-SDR
+After=network.target
+
+[Service]
+Type=exec
+DynamicUser=yes
+SupplementaryGroups=plugdev
+WorkingDirectory=/opt/qo100-lokalspektrum
+Environment=QO100_PORT=8096 QO100_RTL_DEVICE=0 QO100_RTL_GAIN=20
+EnvironmentFile=-/etc/default/qo100-lokalspektrum
+ExecStart=/usr/bin/python3 -u /opt/qo100-lokalspektrum/qo100_spectrum.py --port=${QO100_PORT} --rtl-device=${QO100_RTL_DEVICE} --rtl-gain=${QO100_RTL_GAIN}
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

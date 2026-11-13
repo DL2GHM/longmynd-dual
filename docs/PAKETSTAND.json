@@ -1,0 +1,35 @@
+{
+  "assembled_at": "2026-11-03",
+  "basis": "Zuletzt von DL2GHM bestätigte Auslieferungspakete; kein direkter Live-Abzug des Pi.",
+  "releases": [
+    {
+      "filename": "longmynd-dual-0.1.0-beta.1.run",
+      "sha256": "69de245fec9ca29f718f9ce12745a72a597026e7cd99752edac82e4183732654",
+      "size_bytes": 17367111
+    },
+    {
+      "filename": "longmynd-mobile-0.1.0-beta.2.run",
+      "sha256": "5ce91263ed93f44c0557325c2038f80cc0457c35bd65c68d0018d928bb1c6cf6",
+      "size_bytes": 43994
+    },
+    {
+      "filename": "longmynd-ot-dual-0.1.0-beta.4.run",
+      "sha256": "6126681adffec43dcd32885c9dd2cd00bbfd8a303de06b952b61ef79b818b06b",
+      "size_bytes": 29535
+    }
+  ],
+  "validation": [
+    "Originaldateien aller drei Installer unverändert übernommen",
+    "1702 eingebettete Quelldateien anhand der Paketmanifeste geprüft",
+    "Installationsplan und sieben Installer-Tests ohne Systemänderungen bestanden",
+    "Exportskript an einem isolierten Test-Dateisystem geprüft",
+    "OT-DLL stimmt mit bestätigtem Pufferfix überein"
+  ],
+  "hardware_confirmed": "Raspberry Pi 4 / Debian 13 arm64; DJ7TH/F6DZP MiniTiouner Pro, Serit FTS-4334L-V, zwei FT2232H",
+  "not_included": [
+    "Live-Abzug von Martins Pi",
+    "Android-APK",
+    "SSH-/WireGuard-/WLAN-Zugangsdaten",
+    "Android-Signierschlüssel"
+  ]
+}
