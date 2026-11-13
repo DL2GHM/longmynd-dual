@@ -18,6 +18,11 @@ erklärt USB-Zuordnung und Dienste im Detail. Longmynd Mobil verbindet sich
 mit dem Relay über `http://PI-IP:8090`. Das RTL-Lokalspektrum lässt sich
 in der App als eigene Spektrumquelle auswählen.
 
+## Android
+
+[Longmynd Mobil 0.1.0-beta.39](android) verbindet sich mit dem Mobil-Relay.
+Im Verbindungsfeld die Adresse des eigenen Raspberry Pi mit Port 8090 eintragen.
+
 ## Herkunft und Lizenz
 
 Longmynd Dual ist eine Community-Erweiterung des [Originalprojekts

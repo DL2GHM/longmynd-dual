@@ -1,0 +1,17 @@
+{
+  "version": "0.1.0-beta.39",
+  "versionCode": 39,
+  "source_base": "0.1.0-beta.38",
+  "changes": "Keep the K2 live player and its volume active during chat when K2 was selected, detaching only its video.",
+  "java_model_tests": [
+    "VideoLayoutModelTest",
+    "ChatLayoutModelTest"
+  ],
+  "device_test_performed": false,
+  "pi_update_required": false,
+  "libvlc_version": "3.6.5",
+  "sdk": 35,
+  "build_tools": "35.0.0",
+  "min_sdk": 26,
+  "public_source_change": "Replace the original LAN server address with raspberrypi.local."
+}
